@@ -20,6 +20,7 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT  # protocol mapping
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
     depends_on:
       - zookeeper
   kafka-ui:
@@ -32,6 +33,9 @@ services:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    depends_on:
+      - zookeeper
+      - kafka
 
 volumes:
   zookeeper_data:
